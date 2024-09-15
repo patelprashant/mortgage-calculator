@@ -32,3 +32,34 @@ col1, col2, col3 = st.columns(3)
 col1.metric(label="Month Replayments", value=f"{monthly_payment:,.2f}")
 col2.metric(label="Total Replayments", value=f"{total_payments:,.0f}")
 col3.metric(label="Total Interest", value=f"{total_interest:,.0f}")
+
+
+# Create a data-frame with the payment schedule.
+schedule = []
+remaining_balance = loan_amount
+
+for i in range(1, number_of_payments):
+    interest_payment = remaining_balance * monthly_interest_rate
+    principal_payment = monthly_payment - interest_payment
+    remaining_balance -= principal_payment
+    year = math.ceil(i/12)
+    schedule.append(
+        [
+            i,
+            monthly_payment,
+            principal_payment,
+            interest_payment,
+            remaining_balance,
+            year,
+        ]
+    )
+
+df = pd.DataFrame(
+    schedule,
+    columns=["Month", "Payment", "Principal", "Interest", "Remaining Balance", "Year"],
+)
+
+# Display the data-frame as a chart.
+st.write("### Payment Schedule")
+payments_df = df[["Year", "Remaining Balance"]].groupby("Year").min()
+st.line_chart(payments_df)
