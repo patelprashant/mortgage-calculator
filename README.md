@@ -1,6 +1,8 @@
-# 🎈 Blank app template
+# 🎈 Mortgage Calculator
 
-A simple Streamlit app template for you to modify!
+A simple Streamlit app to calculate mortgage for you to modify!
+
+![Screenshot](./assets/calculator_a.png)
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
